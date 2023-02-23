@@ -5,3 +5,5 @@ py3Dmol
 pickleshare
 scikit-learn
 stmol
+matplotlib
+chembl-webresource-client
