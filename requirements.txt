@@ -3,6 +3,6 @@ pandas
 numpy
 rdkit
 py3Dmol
-pickle
+Pillow
 scikit-learn
 stmol
