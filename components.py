@@ -1,7 +1,6 @@
 import pandas as pd
 import streamlit as st
 import custom_funcs as ctk
-import qsar
 from random import randint
 
 def ligand_qsar():
@@ -25,7 +24,7 @@ def ligand_qsar():
         if submit_job and not ctk.valid_smiles(smi):
             st.error('Invalid SMILES')
         elif submit_job and ctk.valid_smiles(smi):
-            pred_dict = qsar.deploy_ensemble(smi)
+            pred_dict = ctk.deploy_ensemble(smi)
             predictions = list(pred_dict.values())
             st.write(f'**Inputted ligand and prediction details**')
             blk=ctk.makeblock(smi)

@@ -1,3 +1,4 @@
+import pickle
 import py3Dmol
 import pandas as pd
 from stmol import showmol
@@ -17,10 +18,10 @@ def makeblock(smi):
         return mblock
 
 def render_mol(xyz,style):
-    xyzview = py3Dmol.view(width=665,height=400)#(width=400,height=400)
+    xyzview = py3Dmol.view(width=665,height=400)
     xyzview.addModel(xyz,'mol')
     xyzview.setStyle({style.lower():{}})
-    xyzview.setBackgroundColor('#0E1117')   #16181E
+    xyzview.setBackgroundColor('#0E1117')
     xyzview.zoomTo()
     showmol(xyzview,height=400,width=665)
     
@@ -43,6 +44,24 @@ def computeFP(smiles, labels=None):
     fp_df = pd.DataFrame(data=fpdata, index=smiles)
     if labels is not None: fp_df['labels'] =labels
     return fp_df
+
+def deploy_model(key,smiles):
+    data = []
+    with open(f'models/{key}_model.pkl', 'rb') as f:
+        mol = Chem.MolFromSmiles(smiles)
+        ecfp6 = [int(x) for x in AllChem.GetMorganFingerprintAsBitVect(mol, 3, nBits=2048)]
+        data += [ecfp6]
+        model = pickle.load(f)
+        res = model.predict(data)
+    return res[0]
+
+def deploy_ensemble(smiles):
+    ensemble = ['rf', 'svm', 'mlp']
+    predictions = {}
+    for key in ensemble:
+        pred = deploy_model(key, smiles)
+        predictions[key] = pred
+    return predictions
 
 
 def valid_smiles(smi):
