@@ -137,7 +137,7 @@ def app_info():
     st.markdown('''
                 **Author info**
                 ---
-                Streamlit app and classification models were developed solely by me, Gurveer Singh Shienh. My LinkedIn profile can be found at www.linkedin.com/in/gurveer-shienh-8a09a2189. Source code can be found at https://github.com/gurveershienh
+                Streamlit app and classification models were developed solely by me, Gurveer Singh Shienh. My LinkedIn profile can be found at www.linkedin.com/in/gurveer-shienh-8a09a2189. Source code can be found at https://github.com/gurveershienh/ER-Alpha-Classifier
                 
                 ''')
     

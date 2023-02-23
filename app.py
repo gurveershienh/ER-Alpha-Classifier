@@ -2,6 +2,9 @@ import streamlit as st
 import components
 
 def app():
+    st.set_page_config(
+            page_title="ER-Alpha Classifier",
+    )
     
     st.markdown('''
                 ### :pill: Estrogen Receptor-α Ligand Classifier 
